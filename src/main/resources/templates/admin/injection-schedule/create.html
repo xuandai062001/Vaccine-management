@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layouts/main::areas(~{::title},~{::main})}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Injection Schedule</title>
+</head>
+<body>
+
+<main class="main-content">
+    <h1>Create Injection Schedule</h1>
+    <form th:action="@{/admin/injection-schedule/create}" method="post" th:object="${injectionschedule}">
+        <div class="form-group-fields">
+            <div class="row g-3">
+                <div class="col-lg-4">
+                    <label class="font-weight-bold">Vaccine<span class="text-danger">(*):</span></label>
+                    <div class="input-custom-group">
+                        <select class="form-control" id="" th:field="*{vaccineSchedule.vaccineId}">
+                            <option th:each="c : ${vaccines}" th:value="${c.vaccineId}" th:text="${c.vaccineName}"
+                                    th:selected="${c.vaccineId == injectionschedule.vaccineSchedule.vaccineId}">></option>
+
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <label class="font-weight-bold">From<span class="text-danger">(*):</span></label>
+                    <div class="input-custom-group">
+                        <input id="startDate" th:field="*{startDate}" th:value="*{startDate}" type="date" class="form-control">
+                        <span th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <label class="font-weight-bold">To<span class="text-danger">(*):</span></label>
+                    <div class="input-custom-group">
+                        <input id="endDate" th:field="*{endDate}" th:value="*{endDate}" type="date" class="form-control">
+                        <span th:if="${#fields.hasErrors('endDate')}" th:errors="*{endDate}" class="text-danger"></span>
+
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <label class="font-weight-bold">Place<span class="text-danger">(*):</span></label>
+                    <div class="input-custom-group">
+                        <textarea name="" id="place" th:field="*{place}" cols="30" rows="5" style="resize: none;"
+                                  class="border border-secondary-subtle rounded"></textarea>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <label class="font-weight-bold">Note <span class="text-danger">(*):</span></label>
+                    <div class="input-custom-group">
+                        <textarea name="" style="resize: none;" id="note" th:field="*{note}" cols="100" rows="5"
+                                  class="border border-secondary-subtle rounded"></textarea>
+                    </div>
+                </div>
+                <div class="pl-3 pb-5 action mt-4">
+                    <button type="submit" class="btn btn-success">Save</button>
+                    <button type="reset" class="btn btn-info">Reset</button>
+                    <a th:href="@{/admin/injection-result/create}" class="btn btn-warning text-decoration-none">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </form>
+</main>
+
+</body>
+</html>

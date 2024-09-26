@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layouts/main::areas(~{::title},~{::main})}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UPDATE VACCINE</title>
+</head>
+<body>
+
+<main class="main-content">
+    <h1>Update Vaccine</h1>
+    <form th:action="@{/admin/vaccine/create}" method="post" th:object="${vaccine}">
+        <div class="form-group-fields">
+            <div class="row g-3">
+                <div class="col-lg-4">
+                    <label class="font-weight-bold">Vaccine Id<span class="text-danger">(*):</span></label>
+                    <div class="input-custom-group">
+                        <input type="text" class="form-control" name="vaccineId" th:field="*{vaccineId}" readonly>
+                    </div>
+                    <div th:errors="*{vaccineId}" class="ml-5 text-danger"></div>
+                </div>
+                <div class="col-lg-4">
+                    <label class="font-weight-bold">Active<span class="text-danger">(*):</span></label>
+                    <div class="input-custom-group">
+                        <i class="fas fa-fill-drip"></i>
+                        <input type="checkbox" name="status" th:field="*{status}"  id="status" class="mr-2">
+                        <!--                        <input type="checkbox" class="form-control" value="InActive" name="status" th:field="*{status}">-->
+                    </div>
+                    <div th:errors="*{status}" class="ml-5 text-danger"></div>
+                </div>
+
+            </div>
+            <div class="row g-3 mt-4">
+                <div class="col-lg-4">
+                    <label class="font-weight-bold">Vaccine Name<span class="text-danger">(*):</span></label>
+                    <div class="input-custom-group">
+                        <input type="text" class="form-control" name="vaccineName" th:field="*{vaccineName}">
+                    </div>
+                    <div th:errors="*{vaccineName}" class="ml-5 text-danger"></div>
+                </div>
+
+                <div class="col-lg-4">
+                    <label class="font-weight-bold">Vaccine Type<span class="text-danger">(*):</span></label>
+                    <div class="input-custom-group">
+                        <select class="form-control" id="vaccinetype" th:field="*{vaccineVaccineType.vaccineTypeId}">
+                            <option th:if="${vaccinetypes}" th:each="c : ${vaccinetypes}"
+                                    th:value="${c.vaccineTypeId}"
+                                    th:text="${c.vaccineTypeName}"
+                                    th:selected="${c.vaccineTypeId == vaccine.vaccineVaccineType.vaccineTypeId}">
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bg-light shadow form-group-fields">
+            <p class="pl-3 pt-3 pb-3 border-bottom border-secondary-subtle">Account Information</p>
+            <div class="row g-3">
+                <div class="flex-column col-lg-4">
+                    <label class="font-weight-bold">Number of inject<span class="text-danger"></span></label>
+                    <div class="input-custom-group">
+                        <input type="text" class="form-control" name="numberOfInjection" th:field="*{numberOfInjection}">
+                        <div th:errors="*{numberOfInjection}" class="ml-5 text-danger"></div>
+                    </div>
+                </div>
+                <div class="flex-column col-lg-4">
+                    <label class="font-weight-bold">Usage<span class="text-danger"></span></label>
+                    <div class="input-custom-group">
+                        <textarea name="usage" id="usage" cols="30" rows="5" style="resize: none;" th:field="*{usage}"></textarea>
+                    </div>
+                </div>
+                <div class="flex-column col-lg-4">
+                    <label class="font-weight-bold">Indication<span class="text-danger"></span></label>
+                    <div class="input-custom-group">
+                        <textarea name="indication" style="resize: none;" id="indication" cols="100" rows="5" th:field="*{indication}" ></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="flex-column col-lg-4">
+                    <label class="font-weight-bold">Contraindicatio<span class="text-danger"></span></label>
+                    <div class="input-custom-group">
+                        <textarea name="contraindication" style="resize: none;" id="contraindication" cols="100" rows="5" th:field="*{contraindication}"></textarea>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <label class="font-weight-bold">Time of beginning next injection<span class="text-danger"></span></label>
+                    <div class="input-custom-group">
+                        <input type="date" class="form-control" name="timeBeginNextInjection" th:field="*{timeBeginNextInjection}" th:value="*{timeBeginNextInjection}">
+                        <span th:errors="*{timeBeginNextInjection}" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <label class="font-weight-bold">Time of ending next injection<span class="text-danger"></span></label>
+                    <div class="input-custom-group">
+                        <input type="date" class="form-control" name="timeEndNextInjection" th:field="*{timeEndNextInjection}" >
+                        <span th:errors="*{timeEndNextInjection}" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <label class="font-weight-bold">Origin<span class="text-danger"></span></label>
+                    <div class="input-custom-group">
+                        <input type="text" class="form-control" name="origin" th:field="*{origin}">
+                        <div th:errors="*{origin}" class="ml-5 text-danger"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pl-3 pb-5 action mt-4">
+                <button type="submit" class="btn btn-success">Save</button>
+                <button type="reset" class="btn btn-info">Reset</button>
+                <a th:href="@{/admin/vaccine/list}" class="btn btn-warning text-decoration-none">Cancel</a>
+            </div>
+        </div>
+
+    </form>
+</main>
+
+</body>
+</html>
