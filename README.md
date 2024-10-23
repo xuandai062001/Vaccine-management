@@ -5,6 +5,6 @@ Chức năng: CRUD, quản lý dữ liệu, phân trang, xác thực và phân q
 
 Công nghệ sử dụng: Spring boot, Spring security, Spring MVC, Thymeleaf, HTML, CSS, Javascript. 
 ![Logo](assets/login.jpg)
-![Logo](employeeManagement.jpg)
+![Logo](assets/employeeManagement.jpg)
 ![Logo](assets/editEmployee.jpg)
 ![Logo](assets/report.jpg)
